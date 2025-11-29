@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom"; // NEW: Import Link for routing
+import { Link } from "react-router-dom";
 import TopicsModal from "./TopicsModal";
 
 const Banner = () => {
@@ -38,8 +38,8 @@ const Banner = () => {
           Get Started
         </motion.button>
 
-        {/* NEW: Learn button - navigates to topic page */}
-        <Link to="/topic/react-basics">
+        {/* UPDATED: Start Learning button - navigates to topics list */}
+        <Link to="/topics">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

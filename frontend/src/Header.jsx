@@ -42,14 +42,15 @@ const Header = () => {
     visible: { opacity: 1, x: 0 },
   };
 
-  const navItems = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Projects", href: "#projects" },
-    { label: "Services", href: "#services" },
-    { label: "Contact", href: "#contact" },
-    { label: "Learn", href: "/topic/react-basics" }, // NEW: Learning feature
-  ];
+const navItems = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Services", href: "#services" },
+  { label: "Contact", href: "#contact" },
+  { label: "Learn", href: "/topics" }, // ← Route to list page
+];
+
 
   return (
     <motion.header

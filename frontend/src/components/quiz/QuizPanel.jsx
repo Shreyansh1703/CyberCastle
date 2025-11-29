@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
+function QuizPanel({ topicId = "network-attacks", userId = "anonymous" }) {
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -15,7 +15,7 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
     setAnswers({});
     setCurrent(0);
     try {
-      const res = await fetch("http://localhost:5000/api/quiz/generate", {
+      const res = await fetch("http://localhost:5001/api/quiz/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topicId, userId })
@@ -28,7 +28,7 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
       }
     } catch (e) {
       console.error(e);
-      alert("Failed to load quiz! Make sure backend is running on http://localhost:5000");
+      alert("Failed to load quiz! Make sure backend is running on http://localhost:5001");
     }
     setLoading(false);
   };
@@ -51,7 +51,7 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
           selectedIndex
         }))
       };
-      const res = await fetch("http://localhost:5000/api/quiz/submit", {
+      const res = await fetch("http://localhost:5001/api/quiz/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -73,7 +73,6 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
   return (
     <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm text-gray-100 max-w-3xl mx-auto">
       
-      {/* Initial State - Start Quiz Button */}
       {questions.length === 0 && !finished && (
         <div className="text-center">
           <p className="text-gray-300 mb-6">Generate AI-powered questions adapted to your learning progress</p>
@@ -86,10 +85,8 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
         </div>
       )}
 
-      {/* Quiz Display */}
       {questions.length > 0 && !finished && (
         <>
-          {/* Progress Bar */}
           <div className="mb-8">
             <div className="flex justify-between text-sm text-gray-400 mb-2">
               <span>Question {current + 1} of {questions.length}</span>
@@ -103,10 +100,8 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
             </div>
           </div>
 
-          {/* Question */}
           <h3 className="text-2xl font-semibold mb-8">{questions[current].text}</h3>
 
-          {/* Options */}
           <ul className="space-y-4 mb-10">
             {questions[current].options.map((opt, idx) => {
               const qid = questions[current].id;
@@ -127,14 +122,13 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
             })}
           </ul>
 
-          {/* Navigation Buttons */}
           <div className="flex items-center justify-between pt-6 border-t border-white/10">
             <button
               onClick={handlePrev}
               disabled={current === 0}
               className="px-6 py-3 rounded-lg bg-white/5 border border-white/10 disabled:opacity-40 hover:bg-white/10 font-medium transition-all"
             >
-              ← Previous
+              Previous
             </button>
             <span className="text-gray-400">{current + 1} / {questions.length}</span>
             {current < questions.length - 1 ? (
@@ -156,11 +150,9 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
         </>
       )}
 
-      {/* Results Display */}
       {finished && result && (
         <div className="text-center space-y-8">
           
-          {/* Score */}
           <div>
             <p className="text-6xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text mb-2">
               {result.score}/{result.total}
@@ -170,7 +162,6 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
             </p>
           </div>
 
-          {/* Performance Message */}
           <div className="text-lg text-gray-300">
             {result.score === result.total && <p>🎉 Perfect Score! Amazing work!</p>}
             {result.score >= result.total * 0.8 && result.score < result.total && <p>✨ Great job! You're doing well.</p>}
@@ -178,8 +169,7 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
             {result.score < result.total * 0.6 && <p>💪 Keep learning! You'll improve.</p>}
           </div>
 
-          {/* Weak Areas */}
-          {result.weakAreas && result.weakAreas.length > 0 && (
+          {result.weakAreas?.length > 0 && (
             <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
               <p className="font-bold text-red-300 mb-3">📌 Topics to Review:</p>
               <ul className="space-y-2 text-left">
@@ -190,8 +180,7 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
             </div>
           )}
 
-          {/* Suggestions */}
-          {result.suggestions && result.suggestions.length > 0 && (
+          {result.suggestions?.length > 0 && (
             <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
               <p className="font-bold text-blue-300 mb-3">💡 Suggestions:</p>
               <ul className="space-y-2 text-left">
@@ -202,7 +191,6 @@ function QuizPanel({ topicId = "react-basics", userId = "anonymous" }) {
             </div>
           )}
 
-          {/* Retry Button */}
           <button
             onClick={loadQuiz}
             className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-xl font-bold shadow-lg transition-all text-lg w-full"

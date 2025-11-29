@@ -6,7 +6,7 @@ function TopicsListPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/topics")
+    fetch("http://localhost:5001/api/topics")
       .then(res => res.json())
       .then(data => {
         setTopics(data);
