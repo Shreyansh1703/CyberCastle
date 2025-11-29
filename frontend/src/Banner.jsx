@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaTwitter, FaShieldAlt, FaLock } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import TopicsModal from "./TopicsModal";
 
@@ -62,10 +62,8 @@ const Banner = () => {
           </span>
         </motion.div>
 
-        {/* Button Group */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center">
-
-          {/* Get Started (Topics Modal) */}
+        {/* UPDATED: Start Learning button - navigates to topics list */}
+        <Link to="/topics">
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}

@@ -9,7 +9,7 @@ function TopicPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/topics/${topicId}`)
+    fetch(`http://localhost:5001/api/topics/${topicId}`)
       .then(res => res.json())
       .then(data => {
         setTopicContent(data);

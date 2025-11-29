@@ -46,15 +46,15 @@ const Header = () => {
     visible: { opacity: 1, x: 0 },
   };
 
-  // Cybersecurity navigation
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Topics", href: "/topics" },
-    { label: "Awareness", href: "/awareness" },
-    { label: "Quiz", href: "/quiz" },
-    { label: "Blog", href: "/blog" },
-    { label: "Contact", href: "/contact" }
-  ];
+const navItems = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Services", href: "#services" },
+  { label: "Contact", href: "#contact" },
+  { label: "Learn", href: "/topics" }, // ← Route to list page
+];
+
 
   return (
     <motion.header
